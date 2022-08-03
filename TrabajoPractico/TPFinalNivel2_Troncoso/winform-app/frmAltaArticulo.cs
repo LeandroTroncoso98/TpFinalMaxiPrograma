@@ -94,7 +94,7 @@ namespace winform_app
             {
                 if (articulo == null)
                     articulo = new Articulo();
-                if (validacion.validartxt(txtCodigo,txtNombre,txtDescripcion))
+                if (validacion.validartxt(txtCodigo,txtNombre,txtDescripcion,txtPrecio,txtImagenUrl))
                     return;
                 articulo.CodArticulo = txtCodigo.Text; 
                 articulo.Nombre = txtNombre.Text;

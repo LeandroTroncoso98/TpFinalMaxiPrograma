@@ -45,7 +45,7 @@ namespace winform_app
             }
             return true;
         }
-        public bool validartxt(TextBox codigo,TextBox nombre, TextBox descripcion)
+        public bool validartxt(TextBox codigo,TextBox nombre, TextBox descripcion, TextBox precio, TextBox imagenUrl)
         {
             if (string.IsNullOrEmpty(codigo.Text))
             {
@@ -57,9 +57,22 @@ namespace winform_app
                 MessageBox.Show("Debe ingresar el nombre del producto");
                 return true;
             }
+            else if (string.IsNullOrEmpty(precio.Text))
+            {
+                MessageBox.Show("Debe ingresar un precio para el producto");
+                return true;
+            }
             else if (string.IsNullOrEmpty(descripcion.Text))
             {
                 DialogResult advertencia = MessageBox.Show("¿Esta seguro de que no quiere agregar una descripcion?", "Articulo sin descripcion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (advertencia == DialogResult.Yes)
+                    return false;
+                else
+                    return true;
+            }
+            else if (string.IsNullOrEmpty(imagenUrl.Text))
+            {
+                DialogResult advertencia = MessageBox.Show("¿Esta seguro que no quiere agregar una imagen?", "Articulo sin imagen", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (advertencia == DialogResult.Yes)
                     return false;
                 else

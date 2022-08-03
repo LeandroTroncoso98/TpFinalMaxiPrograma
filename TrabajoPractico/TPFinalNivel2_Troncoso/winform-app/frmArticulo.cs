@@ -104,6 +104,7 @@ namespace winform_app
         //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------/
         private void frmArticulo_Load(object sender, EventArgs e)
         {
+            this.MaximumSize = SystemInformation.PrimaryMonitorMaximizedWindowSize;
             cargar();
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Precio");
