@@ -15,6 +15,7 @@ namespace winform_app
     public partial class frmArticulo : Form
     {
         private List<Articulo> listaArticulo;
+        private Validacion validar = new Validacion();
         public frmArticulo()
         {
             InitializeComponent();
@@ -46,7 +47,7 @@ namespace winform_app
         private int clickX = 0, clickY = 0;
         private void ptop_MouseMove(object sender, MouseEventArgs e)
         {
-            if(e.Button != MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)
             {
                 clickX = e.X;
                 clickY = e.Y;
@@ -121,9 +122,9 @@ namespace winform_app
         private void btnDetalle_Click(object sender, EventArgs e)
         {
             Articulo seleccionado;
-            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;         
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmAltaArticulo detalle = new frmAltaArticulo(seleccionado, seleccionado.Nombre);
-            detalle.ShowDialog();           
+            detalle.ShowDialog();
         }
 
         private void btnElminar_Click(object sender, EventArgs e)
@@ -133,17 +134,17 @@ namespace winform_app
             try
             {
                 DialogResult advertencia = MessageBox.Show("¿Desea eliminar el archivo?", "Eliminar archivo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(advertencia == DialogResult.Yes)
+                if (advertencia == DialogResult.Yes)
                 {
                     negocio.Eliminar(articulo.Id);
                     cargar();
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
-            }            
+            }
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -151,11 +152,16 @@ namespace winform_app
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
+
+                if (validar.validarFiltro(cboCampo, cboCriterio, txtFiltro))
+                    return;
                 string campo = cboCampo.SelectedItem.ToString();
                 string criterio = cboCriterio.SelectedItem.ToString();
                 string nombre = txtFiltro.Text;
                 dgvArticulos.DataSource = negocio.Filtrar(campo, criterio, nombre);
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -164,7 +170,7 @@ namespace winform_app
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string opcion = cboCampo.SelectedItem.ToString();
-            if(opcion == "Precio")
+            if (opcion == "Precio")
             {
                 cboCriterio.Items.Clear();
                 cboCriterio.Items.Add("Menor a");
@@ -187,6 +193,6 @@ namespace winform_app
             cargar();
         }
 
-        
+
     }
 }

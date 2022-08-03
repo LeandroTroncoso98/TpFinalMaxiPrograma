@@ -15,6 +15,7 @@ namespace winform_app
     public partial class frmAltaArticulo : Form
     {
         private Articulo articulo = null;
+        private Validacion validacion = new Validacion();
 
         public frmAltaArticulo()
         {
@@ -93,6 +94,8 @@ namespace winform_app
             {
                 if (articulo == null)
                     articulo = new Articulo();
+                if (validacion.validartxt(txtCodigo,txtNombre,txtDescripcion))
+                    return;
                 articulo.CodArticulo = txtCodigo.Text; 
                 articulo.Nombre = txtNombre.Text;
                 articulo.Precio = decimal.Parse(txtPrecio.Text);
