@@ -3,8 +3,10 @@ using negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace winform_app
     {
         private Articulo articulo = null;
         private Validacion validacion = new Validacion();
+        private OpenFileDialog archivo = null;
 
         public frmAltaArticulo()
         {
@@ -41,6 +44,8 @@ namespace winform_app
             txtImagenUrl.ReadOnly = true;
             cboCategoria.Enabled = false;
             cboMarca.Enabled = false;
+            btnAgregarImagen.Visible = false;
+            txtImagenUrl.Width = 293;
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -113,6 +118,8 @@ namespace winform_app
                     negocio.agregar(articulo);
                     MessageBox.Show("Agregado Exitosamente");
                 }
+                if (archivo != null && !(txtImagenUrl.Text.ToUpper().Contains("HTTP")))
+                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["image-folder"] + archivo.SafeFileName);
                 
                 Close();               
             }
@@ -137,6 +144,17 @@ namespace winform_app
                 pbImagen.Load("https://th.bing.com/th/id/R.b9f8fb5b4ae645af922016c1fef19a9e?rik=n6ijNdvUdInMAg&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fdownload_546302.png&ehk=esufhR2EMnshhANfFAucbBI2jDIqTIjS20AfIBENF9M%3d&risl=&pid=ImgRaw&r=0");
             }
         }
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+           
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtImagenUrl.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+            }
+        }
         //--------------------------------------------------------------------------------------------------------------//
         private void btnMax_Click(object sender, EventArgs e)
         {
@@ -156,6 +174,9 @@ namespace winform_app
                 WindowState = FormWindowState.Minimized;
         }
         private int clickX = 0, clickY = 0;
+
+
+
         private void ptop_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)

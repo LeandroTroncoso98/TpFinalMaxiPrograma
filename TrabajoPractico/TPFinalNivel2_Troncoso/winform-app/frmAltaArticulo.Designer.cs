@@ -53,6 +53,7 @@ namespace winform_app
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblMensaje = new System.Windows.Forms.Label();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
             this.ptop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbImagen)).BeginInit();
             this.SuspendLayout();
@@ -258,7 +259,7 @@ namespace winform_app
             this.txtImagenUrl.Location = new System.Drawing.Point(397, 475);
             this.txtImagenUrl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtImagenUrl.Name = "txtImagenUrl";
-            this.txtImagenUrl.Size = new System.Drawing.Size(293, 15);
+            this.txtImagenUrl.Size = new System.Drawing.Size(154, 15);
             this.txtImagenUrl.TabIndex = 18;
             this.txtImagenUrl.Leave += new System.EventHandler(this.txtImagenUrl_Leave);
             // 
@@ -333,12 +334,26 @@ namespace winform_app
             this.lblMensaje.Size = new System.Drawing.Size(0, 13);
             this.lblMensaje.TabIndex = 23;
             // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(55)))), ((int)(((byte)(133)))));
+            this.btnAgregarImagen.FlatAppearance.BorderSize = 0;
+            this.btnAgregarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarImagen.Location = new System.Drawing.Point(558, 469);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(137, 25);
+            this.btnAgregarImagen.TabIndex = 24;
+            this.btnAgregarImagen.Text = "Agregar imagen";
+            this.btnAgregarImagen.UseVisualStyleBackColor = false;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(101)))), ((int)(((byte)(187)))));
             this.ClientSize = new System.Drawing.Size(713, 653);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.lblMensaje);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -403,5 +418,6 @@ namespace winform_app
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox cboCategoria;
         private System.Windows.Forms.Label lblMensaje;
+        private System.Windows.Forms.Button btnAgregarImagen;
     }
 }
